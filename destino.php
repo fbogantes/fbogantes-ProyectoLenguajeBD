@@ -10,118 +10,77 @@ include './library/consulSQL.php';
 </head>
 <body id="container-page-product">
     <?php include './plantilla/navbar.php'; ?>
-    <section id="store">
-       <br>
-        <div class="container">
-            <div class="page-header">
-              <h1>Destinos <small class="tittles-pages-logo">ViajiTico</small></h1>
-            </div>
-            <?php
-            session_start();
-            include_once './library/configServer.php';
-            include_once './library/consulSQL.php';
+    <p class="lead">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
+</p>
+<div class="container">
+  <div class="row">
+        <div class="col-xs-12">
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading text-center"><h4>Usuarios de la Página</h4></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="">
+                            <tr>
+                              <th class="text-center">ID</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Pais</th>
+                                <th class="text-center">Provincia</th>
+                                <th class="text-center">Canton</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $mysqli = ejecutarSQL::conectar();
 
-            $categoriac = ejecutarSQL::consultar('SELECT * FROM DESTINO');
-            oci_execute($categoriac);
-              // $checkAllCat=ejecutarSQL::consultar("SELECT * FROM categoria");
-              // if(oci_num_rows($checkAllCat)>=1):
-            ?>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-xs-12 col-md-4">
-                    <div class="dropdown">
-                      <button class="btn btn-primary btn-raised dropdown-toggle" type="button" id="drpdowncategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Seleccione un Destino &nbsp;
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="drpdowncategory">
-                        <?php 
-                          while($dest=oci_fetch_array($categoriac, OCI_ASSOC + OCI_RETURN_NULLS)){
-                              echo '
-                                <li><a href="destino.php?categ='.$dest['id_destino'].'">'.$dest['des_actividad'].'</a></li>
-                                <li role="separator" class="divider"></li>
-                              ';
-                          }
-                        ?>
-                      </ul>
-                    </div>
-                  </div>
-                  <!-- <div class="col-xs-12 col-md-4 col-md-offset-4">
-                    <form action="./search.php" method="GET">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                          <input type="text" id="addon1" class="form-control" name="term" required="" title="Escriba nombre o marca del producto">
-                          <span class="input-group-btn">
-                              <button class="btn btn-info btn-raised" type="submit">Buscar</button>
-                          </span>
-                        </div>
-                      </div>
-                    </form>
-                  </div> -->
+                                $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
+                                $regpagina = 30;
+                                $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
+
+                                $destinos=ejecutarSQL::consultar("SELECT  FROM DESTINO");
+                                oci_execute($destinos);
+                                $totalregistros = ejecutarSQL::consultar("SELECT count(*) FROM DESTINO");
+                                oci_execute($destinos);
+                                $totalregistros = oci_num_rows($totalregistros);
+
+                                $numeropaginas = 1;
+
+                                $cr=$inicio+1;
+                                
+                                while($row=oci_fetch_array($destinos, OCI_ASSOC)){
+                            ?>
+                            <tr>
+                            <td class="text-center"><?php echo $cr; ?></td>
+                            <td class="text-center"><?php echo $row['ID_DESTINO']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_ACTIVIDAD']; ?></td>
+                            <td class="text-center"><?php echo $row['ID_PAIS']; ?></td>
+                            <td class="text-center"><?php echo $row['ID_PROVINCIA']; ?></td>
+                            <td class="text-center"><?php echo $row['ID_CANTON']; ?></td>
+                            <td class="text-center">
+                                <a href="#!" class="btn btn-raised btn-xs btn-success btn-block btn-up-row" data-code="<?php echo $row["ID_DESTINO"]; ?>">Actualizar</a>
+                                <?php 
+                                
+                                    if(is_file("./assets/comprobantes/".$row['Adjunto'])){
+                                      echo '<a href="./assets/comprobantes/'.$row['Adjunto'].'" target="_blank" class="btn btn-raised btn-xs btn-info btn-block">Comprobante</a>';
+                                    }
+                                ?>
+                            </td>
+                            <td class="text-center">
+                              <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">
+                                <input type="hidden" name="num-pedido" value="<?php echo $row["ID_DESTINO"]; ?>">
+                                <button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>  
+                              </form>
+                            </td>
+                            </tr>
+                            <?php
+                              $cr++;
+                              }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-              </div>
-            <?php
-                $categoria=consultasSQL::clean_string($_GET['categ']);
-                if(isset($categoria) && $categoria!=""){
-            ?>
-              <div class="row">
-                <?php
-
-                 include_once './library/configServer.php';
-                 include_once './library/consulSQL.php';
-                  $stid = oci_connect(SERVER, USER, PASS);
-                  //oci_set_charset($stid, "utf8");
-
-                  
-
-                  $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
-                  $regpagina = 20;
-                  $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
-
-                  $consultar_productos=oci_parse($stid,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE CodigoCat='$categoria' AND Stock > 0 AND Estado='Activo' LIMIT $inicio, $regpagina");
-
-                  $selCat=ejecutarSQL::consultar("SELECT * FROM categoria WHERE CodigoCat='$categoria'");
-                  $datCat=oci_fetch_array($selCat, OCI_ASSOC + OCI_RETURN_NULLS);
-
-                  $totalregistros = oci_parse($stid,"SELECT FOUND_ROWS()");
-                  $totalregistros = oci_fetch_array($totalregistros, OCI_ASSOC + OCI_RETURN_NULLS);
-        
-                  $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
-
-                  if(oci_num_rows($consultar_productos)>=1){
-                    echo '<h3 class="text-center">Se muestran los productos de la categoría <strong>"'.$datCat['Nombre'].'"</strong></h3><br>';
-                    while($prod=oci_fetch_array($consultar_productos, OCI_ASSOC + OCI_RETURN_NULLS)){
-                ?>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                         <div class="thumbnail">
-                           <img class="img-product" src="./assets/img-products/<?php if($prod['Imagen']!="" && is_file("./assets/img-products/".$prod['Imagen'])){ echo $prod['Imagen']; }else{ echo "default.png"; } ?>
-                           ">
-                           <div class="caption">
-                             <h3><?php echo $prod['Marca']; ?></h3>
-                             <p><?php echo $prod['NombreProd']; ?></p>
-                             <?php if($prod['Descuento']>0): ?>
-                             <p>
-                             <?php
-                             $pref=number_format($prod['Precio']-($prod['Precio']*($prod['Descuento']/100)), 2, '.', '');
-                             echo $prod['Descuento']."% descuento: $".$pref; 
-                             ?>
-                             </p>
-                             <?php else: ?>
-                              <p>$<?php echo $prod['Precio']; ?></p>
-                             <?php endif; ?>
-                             <p class="text-center">
-                                 <a href="infoProd.php?CodigoProd=<?php echo $prod['CodigoProd']; ?>" class="btn btn-primary btn-raised btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; Detalles</a>
-                             </p>
-
-                           </div>
-                         </div>
-                     </div>     
-                <?php    
-                  }
-                  if($numeropaginas>0):
-                ?>
-                <div class="clearfix"></div>
+                <?php if($numeropaginas>=1): ?>
                 <div class="text-center">
                   <ul class="pagination">
                     <?php if($pagina == 1): ?>
@@ -132,7 +91,7 @@ include './library/consulSQL.php';
                         </li>
                     <?php else: ?>
                         <li>
-                            <a href="product.php?categ=<?php echo $categoria; ?>&pag=<?php echo $pagina-1; ?>">
+                            <a href="configAdmin.php?view=row&pag=<?php echo $pagina-1; ?>">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -142,9 +101,9 @@ include './library/consulSQL.php';
                     <?php
                         for($i=1; $i <= $numeropaginas; $i++ ){
                             if($pagina == $i){
-                                echo '<li class="active"><a href="product.php?categ='.$categoria.'&pag='.$i.'">'.$i.'</a></li>';
+                                echo '<li class="active"><a href="configAdmin.php?view=row&pag='.$i.'">'.$i.'</a></li>';
                             }else{
-                                echo '<li><a href="product.php?categ='.$categoria.'&pag='.$i.'">'.$i.'</a></li>';
+                                echo '<li><a href="configAdmin.php?view=row&pag='.$i.'">'.$i.'</a></li>';
                             }
                         }
                     ?>
@@ -158,30 +117,59 @@ include './library/consulSQL.php';
                         </li>
                     <?php else: ?>
                         <li>
-                            <a href="product.php?categ=<?php echo $categoria; ?>&pag=<?php echo $pagina+1; ?>">
+                            <a href="configAdmin.php?view=row&pag=<?php echo $pagina+1; ?>">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     <?php endif; ?>
                   </ul>
                 </div>
-                <?php
-                  endif;
-                  }else{
-                    echo '<h2 class="text-center">Lo sentimos, no hay productos registrados en la categoría <strong>"'.$datCat['Nombre'].'"</strong></h2>';
-                  }
-                ?>
-              </div>
-            <?php
-                }else{
-                  echo '<h2 class="text-center">Por favor seleccione una categoría para empezar</h2>';
-                }
-              // else:
-                // echo '<h2 class="text-center">Lo sentimos, no hay productos ni categorías registradas en la tienda</h2>';
-              // endif;
-            ?>
+                <?php endif; ?>
+            </div>
         </div>
-    </section>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-row" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="padding: 15px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h5 class="modal-title text-center text-primary" id="myModalLabel">Actualizar estado del pedido</h5>
+        </div>
+        <form action="./process/updatePedido.php" method="POST" class="FormCatElec" data-form="update">
+            <div id="OrderSelect"></div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success btn-raised btn-sm">Actualizar</button>
+              <button type="button" class="btn btn-danger btn-raised btn-sm" data-dismiss="modal">Cancelar</button>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.btn-up-row').on('click', function(e){
+            e.preventDefault();
+            var code=$(this).attr('data-code');
+            $.ajax({
+                url:'./process/checkOrder.php',
+                type: 'POST',
+                data: 'code='+code,
+                success:function(data){
+                    $('#OrderSelect').html(data);
+                    $('#modal-row').modal({
+                        show: true,
+                        backdrop: "static"
+                    });  
+                }
+            });
+            return false;
+
+        });
+    });
+</script>
     <?php include './plantilla/footer.php'; ?>
 </body>
 </html>

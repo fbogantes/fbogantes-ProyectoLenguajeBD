@@ -60,7 +60,7 @@
               	<?php
                   include 'library/configServer.php';
                   include 'library/consulSQL.php';
-                  $consulta= ejecutarSQL::consultar("SELECT * FROM producto WHERE Stock > 0 AND Estado='Activo' ORDER BY id DESC LIMIT 7");
+                  $consulta= ejecutarSQL::consultar("SELECT * FROM destino WHERE Stock > 0 AND Estado='Activo' ORDER BY id DESC LIMIT 7");
                   $totalproductos = oci_num_rows($consulta);
                   if($totalproductos>0){
                       while($fila=oci_fetch_array($consulta, OCI_ASSOC + OCI_RETURN_NULLS)){

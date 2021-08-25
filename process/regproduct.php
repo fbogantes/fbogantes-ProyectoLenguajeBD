@@ -21,7 +21,7 @@
 
     if($codeProd!="" && $nameProd!="" && $cateProd!="" && $priceProd!="" && $modelProd!="" && $marcaProd!="" && $stockProd!="" && $codePProd!=""){
         $verificar=  ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='".$codeProd."'");
-        $verificaltotal = mysqli_num_rows($verificar);
+        $verificaltotal = oci_num_rows($verificar);
         if($verificaltotal<=0){
             if($imgType=="image/jpeg" || $imgType=="image/png"){
                 if(($imgSize/1024)<=$imgMaxSize){

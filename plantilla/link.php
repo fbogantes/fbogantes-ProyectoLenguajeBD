@@ -11,15 +11,15 @@
 
 <!--<script src="js/validacion.js" defer></script> 
 
-<script src="./js/jquery.min.js"></script>-->
+<script src="./js/jquery.min.js" defer></script>-->
 
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/material.min.js"></script>
-<script src="./js/ripples.min.js"></script>
-<script src="./js/autohidingnavbar.min.js"></script> 
+<script src="./js/bootstrap.min.js" defer></script>
+<script src="./js/material.min.js" defer></script>
+<script src="./js/ripples.min.js" defer></script>
+<script src="./js/autohidingnavbar.min.js" defer></script> 
 <!--<script src="./js/sweetalert.min.js"></script>11111111-->
-<script src="./js/jquery.dataTables.min.js"></script>
-<script src="./js/main.js"></script>
+<script src="./js/jquery.dataTables.min.js" defer></script>
+<script src="./js/main.js" defer></script>
 <script src="./js/video.js" defer></script> 
 <script>
 	$(document).ready(function(){
@@ -28,4 +28,4 @@
 </script>
 
 <!-- Sweet Alert V11.x file-->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
