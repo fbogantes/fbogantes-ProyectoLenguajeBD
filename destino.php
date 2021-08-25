@@ -38,12 +38,12 @@ include './library/consulSQL.php';
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $destinos=ejecutarSQL::consultar("SELECT  FROM DESTINO");
+                                $destinos=ejecutarSQL::consultar("SELECT * FROM DESTINO");
                                 oci_execute($destinos);
                                 $totalregistros = ejecutarSQL::consultar("SELECT count(*) FROM DESTINO");
                                 oci_execute($destinos);
                                 $totalregistros = oci_num_rows($totalregistros);
-
+                                
                                 $numeropaginas = 1;
 
                                 $cr=$inicio+1;
