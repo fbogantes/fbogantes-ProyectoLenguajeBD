@@ -3885,7 +3885,7 @@ function Datepicker() {
 		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
 		stepMonths: 1, // Number of months to step back/forward
 		stepBigMonths: 12, // Number of months to step back/forward for the big links
-		altField: "", // Selector for an alternate field to store selected dates into
+		altField: "", // Selector for an alternate field to viajitico selected dates into
 		altFormat: "", // The date format to use for the alternate field
 		constrainInput: true, // The input is constrained by the current date format
 		showButtonPanel: false, // True to show button panel, false to not show it
@@ -4804,7 +4804,7 @@ $.extend(Datepicker.prototype, {
 			this._hideDatepicker();
 			this._lastInput = inst.input[0];
 			if (typeof(inst.input[0]) !== "object") {
-				inst.input.focus(); // restore focus
+				inst.input.focus(); // reviajitico focus
 			}
 			this._lastInput = null;
 		}
@@ -6005,7 +6005,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's css position
+		//viajitico the helper's css position
 		this.cssPosition = this.helper.css( "position" );
 		this.scrollParent = this.helper.scrollParent( true );
 		this.offsetParent = this.helper.offsetParent();
@@ -6564,10 +6564,10 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				draggable.cancelHelperRemoval = true;
 				sortable.cancelHelperRemoval = false;
 
-				// Use _storedCSS To restore properties in the sortable,
+				// Use _viajiticodCSS To reviajitico properties in the sortable,
 				// as this also handles revert (#9675) since the draggable
 				// may have modified them in unexpected ways (#8809)
-				sortable._storedCSS = {
+				sortable._viajiticodCSS = {
 					position: sortable.placeholder.css( "position" ),
 					top: sortable.placeholder.css( "top" ),
 					left: sortable.placeholder.css( "left" )
@@ -6623,14 +6623,14 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				if ( !sortable.isOver ) {
 					sortable.isOver = 1;
 
-					// Store draggable's parent in case we need to reappend to it later.
+					// viajitico draggable's parent in case we need to reappend to it later.
 					draggable._parent = ui.helper.parent();
 
 					sortable.currentItem = ui.helper
 						.appendTo( sortable.element )
 						.data( "ui-sortable-item", true );
 
-					// Store helper option to later restore it
+					// viajitico helper option to later reviajitico it
 					sortable.options._helper = sortable.options.helper;
 
 					sortable.options.helper = function() {
@@ -6693,7 +6693,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 					sortable._trigger( "out", event, sortable._uiHash( sortable ) );
 					sortable._mouseStop( event, true );
 
-					// restore sortable behaviors that were modfied
+					// reviajitico sortable behaviors that were modfied
 					// when the draggable entered the sortable area (#9481)
 					sortable.options.revert = sortable.options._revert;
 					sortable.options.helper = sortable.options._helper;
@@ -6702,7 +6702,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 						sortable.placeholder.remove();
 					}
 
-					// Restore and recalculate the draggable's offset considering the sortable
+					// Reviajitico and recalculate the draggable's offset considering the sortable
 					// may have modified them in unexpected ways. (#8809, #10669)
 					ui.helper.appendTo( draggable._parent );
 					draggable._refreshOffsets( event );
@@ -8993,7 +8993,7 @@ $.widget( "ui.droppable", {
 
 		this.proportions = function( /* valueToWrite */ ) {
 			if ( arguments.length ) {
-				// Store the droppable's proportions
+				// viajitico the droppable's proportions
 				proportions = arguments[ 0 ];
 			} else {
 				// Retrieve or derive the droppable's proportions
@@ -10119,7 +10119,7 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 			applyClassChange,
 			allAnimations = o.children ? animated.find( "*" ).addBack() : animated;
 
-		// map the animated objects to store the original styles.
+		// map the animated objects to viajitico the original styles.
 		allAnimations = allAnimations.map(function() {
 			var el = $( this );
 			return {
@@ -10251,8 +10251,8 @@ $.extend( $.effects, {
 		}
 	},
 
-	// Restores a set of previously saved properties from a data storage
-	restore: function( element, set ) {
+	// Reviajiticos a set of previously saved properties from a data storage
+	reviajitico: function( element, set ) {
 		var val, i;
 		for ( i = 0; i < set.length; i++ ) {
 			if ( set[ i ] !== null ) {
@@ -10322,7 +10322,7 @@ $.extend( $.effects, {
 					margin: 0,
 					padding: 0
 				}),
-			// Store the size in case width/height are defined in % - Fixes #5245
+			// viajitico the size in case width/height are defined in % - Fixes #5245
 			size = {
 				width: element.width(),
 				height: element.height()
@@ -10704,7 +10704,7 @@ var effectBlind = $.effects.effect.blind = function( o, done ) {
 			if ( mode === "hide" ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		}
@@ -10807,7 +10807,7 @@ var effectBounce = $.effects.effect.bounce = function( o, done ) {
 		if ( hide ) {
 			el.hide();
 		}
-		$.effects.restore( el, props );
+		$.effects.reviajitico( el, props );
 		$.effects.removeWrapper( el );
 		done();
 	});
@@ -10877,7 +10877,7 @@ var effectClip = $.effects.effect.clip = function( o, done ) {
 			if ( !show ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		}
@@ -10940,7 +10940,7 @@ var effectDrop = $.effects.effect.drop = function( o, done ) {
 			if ( mode === "hide" ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		}
@@ -11134,7 +11134,7 @@ var effectFold = $.effects.effect.fold = function( o, done ) {
 			if ( hide ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		});
@@ -11182,7 +11182,7 @@ var effectHighlight = $.effects.effect.highlight = function( o, done ) {
 				if ( mode === "hide" ) {
 					elem.hide();
 				}
-				$.effects.restore( elem, props );
+				$.effects.reviajitico( elem, props );
 				done();
 			}
 		});
@@ -11208,7 +11208,7 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 		el = $( this ),
 		props0 = [ "position", "top", "bottom", "left", "right", "width", "height", "overflow", "opacity" ],
 
-		// Always restore
+		// Always reviajitico
 		props1 = [ "position", "top", "bottom", "left", "right", "overflow", "opacity" ],
 
 		// Copy for children
@@ -11219,11 +11219,11 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 
 		// Set options
 		mode = $.effects.setMode( el, o.mode || "effect" ),
-		restore = o.restore || mode !== "effect",
+		reviajitico = o.reviajitico || mode !== "effect",
 		scale = o.scale || "both",
 		origin = o.origin || [ "middle", "center" ],
 		position = el.css( "position" ),
-		props = restore ? props0 : props1,
+		props = reviajitico ? props0 : props1,
 		zero = {
 			height: 0,
 			width: 0,
@@ -11321,7 +11321,7 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 					outerHeight: child.outerHeight(),
 					outerWidth: child.outerWidth()
 				};
-			if (restore) {
+			if (reviajitico) {
 				$.effects.save(child, props2);
 			}
 
@@ -11354,9 +11354,9 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 			child.css( child.from );
 			child.animate( child.to, o.duration, o.easing, function() {
 
-				// Restore children
-				if ( restore ) {
-					$.effects.restore( child, props2 );
+				// Reviajitico children
+				if ( reviajitico ) {
+					$.effects.reviajitico( child, props2 );
 				}
 			});
 		});
@@ -11374,8 +11374,8 @@ var effectSize = $.effects.effect.size = function( o, done ) {
 			if ( mode === "hide" ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
-			if ( !restore ) {
+			$.effects.reviajitico( el, props );
+			if ( !reviajitico ) {
 
 				// we need to calculate our new positioning based on the scaling
 				if ( position === "static" ) {
@@ -11447,10 +11447,10 @@ var effectScale = $.effects.effect.scale = function( o, done ) {
 	options.queue = false;
 	options.complete = done;
 
-	// Set default origin and restore for show/hide
+	// Set default origin and reviajitico for show/hide
 	if ( mode !== "effect" ) {
 		options.origin = origin || [ "middle", "center" ];
-		options.restore = true;
+		options.reviajitico = true;
 	}
 
 	options.from = o.from || ( mode === "show" ? {
@@ -11646,7 +11646,7 @@ var effectShake = $.effects.effect.shake = function( o, done ) {
 			if ( mode === "hide" ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		});
@@ -11714,7 +11714,7 @@ var effectSlide = $.effects.effect.slide = function( o, done ) {
 			if ( mode === "hide" ) {
 				el.hide();
 			}
-			$.effects.restore( el, props );
+			$.effects.reviajitico( el, props );
 			$.effects.removeWrapper( el );
 			done();
 		}
@@ -13142,7 +13142,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 				uiHash.values = this.values();
 			}
 
-			//store the last changed value index for reference when handles overlap
+			//viajitico the last changed value index for reference when handles overlap
 			this._lastChangedValue = index;
 
 			this._trigger( "change", event, uiHash );
@@ -13721,22 +13721,22 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			body = this.document.find( "body" );
 
 			// support: IE
-			this.storedCursor = body.css( "cursor" );
+			this.viajiticodCursor = body.css( "cursor" );
 			body.css( "cursor", o.cursor );
 
-			this.storedStylesheet = $( "<style>*{ cursor: "+o.cursor+" !important; }</style>" ).appendTo( body );
+			this.viajiticodStylesheet = $( "<style>*{ cursor: "+o.cursor+" !important; }</style>" ).appendTo( body );
 		}
 
 		if(o.opacity) { // opacity option
 			if (this.helper.css("opacity")) {
-				this._storedOpacity = this.helper.css("opacity");
+				this._viajiticodOpacity = this.helper.css("opacity");
 			}
 			this.helper.css("opacity", o.opacity);
 		}
 
 		if(o.zIndex) { // zIndex option
 			if (this.helper.css("zIndex")) {
-				this._storedZIndex = this.helper.css("zIndex");
+				this._viajiticodZIndex = this.helper.css("zIndex");
 			}
 			this.helper.css("zIndex", o.zIndex);
 		}
@@ -13942,7 +13942,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			this._mouseUp({ target: null });
 
 			if(this.options.helper === "original") {
-				this.currentItem.css(this._storedCSS).removeClass("ui-sortable-helper");
+				this.currentItem.css(this._viajiticodCSS).removeClass("ui-sortable-helper");
 			} else {
 				this.currentItem.show();
 			}
@@ -14426,7 +14426,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		}
 
 		if(helper[0] === this.currentItem[0]) {
-			this._storedCSS = { width: this.currentItem[0].style.width, height: this.currentItem[0].style.height, position: this.currentItem.css("position"), top: this.currentItem.css("top"), left: this.currentItem.css("left") };
+			this._viajiticodCSS = { width: this.currentItem[0].style.width, height: this.currentItem[0].style.height, position: this.currentItem.css("position"), top: this.currentItem.css("top"), left: this.currentItem.css("left") };
 		}
 
 		if(!helper[0].style.width || o.forceHelperSize) {
@@ -14678,12 +14678,12 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		this._noFinalSort = null;
 
 		if(this.helper[0] === this.currentItem[0]) {
-			for(i in this._storedCSS) {
-				if(this._storedCSS[i] === "auto" || this._storedCSS[i] === "static") {
-					this._storedCSS[i] = "";
+			for(i in this._viajiticodCSS) {
+				if(this._viajiticodCSS[i] === "auto" || this._viajiticodCSS[i] === "static") {
+					this._viajiticodCSS[i] = "";
 				}
 			}
-			this.currentItem.css(this._storedCSS).removeClass("ui-sortable-helper");
+			this.currentItem.css(this._viajiticodCSS).removeClass("ui-sortable-helper");
 		} else {
 			this.currentItem.show();
 		}
@@ -14723,15 +14723,15 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		}
 
 		//Do what was originally in plugins
-		if ( this.storedCursor ) {
-			this.document.find( "body" ).css( "cursor", this.storedCursor );
-			this.storedStylesheet.remove();
+		if ( this.viajiticodCursor ) {
+			this.document.find( "body" ).css( "cursor", this.viajiticodCursor );
+			this.viajiticodStylesheet.remove();
 		}
-		if(this._storedOpacity) {
-			this.helper.css("opacity", this._storedOpacity);
+		if(this._viajiticodOpacity) {
+			this.helper.css("opacity", this._viajiticodOpacity);
 		}
-		if(this._storedZIndex) {
-			this.helper.css("zIndex", this._storedZIndex === "auto" ? "" : this._storedZIndex);
+		if(this._viajiticodZIndex) {
+			this.helper.css("zIndex", this._viajiticodZIndex === "auto" ? "" : this._viajiticodZIndex);
 		}
 
 		this.dragging = false;
@@ -16288,7 +16288,7 @@ var tooltip = $.widget( "ui.tooltip", {
 	},
 
 	_enable: function() {
-		// restore title attributes
+		// reviajitico title attributes
 		this.element.find( this.options.items ).addBack().each(function() {
 			var element = $( this );
 			if ( element.data( "ui-tooltip-title" ) ) {
@@ -16519,7 +16519,7 @@ var tooltip = $.widget( "ui.tooltip", {
 		clearInterval( this.delayedShow );
 
 		// only set title if we had one before (see comment in _open())
-		// If the title attribute has changed since open(), don't restore
+		// If the title attribute has changed since open(), don't reviajitico
 		if ( target.data( "ui-tooltip-title" ) && !target.attr( "title" ) ) {
 			target.attr( "title", target.data( "ui-tooltip-title" ) );
 		}
@@ -16599,9 +16599,9 @@ var tooltip = $.widget( "ui.tooltip", {
 			// hide animation
 			$( "#" + id ).remove();
 
-			// Restore the title
+			// Reviajitico the title
 			if ( element.data( "ui-tooltip-title" ) ) {
-				// If the title attribute has changed since open(), don't restore
+				// If the title attribute has changed since open(), don't reviajitico
 				if ( !element.attr( "title" ) ) {
 					element.attr( "title", element.data( "ui-tooltip-title" ) );
 				}

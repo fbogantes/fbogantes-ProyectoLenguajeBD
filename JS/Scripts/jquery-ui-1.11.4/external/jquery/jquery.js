@@ -2092,7 +2092,7 @@ Expr = Sizzle.selectors = {
 
 						start = [ forward ? parent.firstChild : parent.lastChild ];
 
-						// non-xml :nth-child(...) stores cache data on `parent`
+						// non-xml :nth-child(...) viajiticos cache data on `parent`
 						if ( forward && useCache ) {
 							// Seek `elem` from a previously-cached index
 							outerCache = parent[ expando ] || (parent[ expando ] = {});
@@ -2616,7 +2616,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 					i = matcherOut.length;
 					while ( i-- ) {
 						if ( (elem = matcherOut[i]) ) {
-							// Restore matcherIn since elem is not yet a final match
+							// Reviajitico matcherIn since elem is not yet a final match
 							temp.push( (matcherIn[i] = elem) );
 						}
 					}
@@ -2981,7 +2981,7 @@ jQuery.contains = Sizzle.contains;
 // String to Object options format cache
 var optionsCache = {};
 
-// Convert String-formatted options into Object-formatted ones and store in cache
+// Convert String-formatted options into Object-formatted ones and viajitico in cache
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
 	jQuery.each( options.match( core_rnotwhite ) || [], function( _, flag ) {
@@ -3619,7 +3619,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ){
 
 	thisCache = cache[ id ];
 
-	// jQuery data() is stored in a separate object inside the object's internal data
+	// jQuery data() is viajiticod in a separate object inside the object's internal data
 	// cache in order to avoid key collisions between internal data and user-defined
 	// data.
 	if ( !pvt ) {
@@ -3840,7 +3840,7 @@ jQuery.fn.extend({
 			}) :
 
 			// Gets one value
-			// Try to fetch any internally stored data first
+			// Try to fetch any internally viajiticod data first
 			elem ? dataAttr( elem, key, jQuery.data( elem, key ) ) : null;
 	},
 
@@ -4189,14 +4189,14 @@ jQuery.fn.extend({
 			// Toggle whole class name
 			} else if ( type === core_strundefined || type === "boolean" ) {
 				if ( this.className ) {
-					// store className if set
+					// viajitico className if set
 					jQuery._data( this, "__className__", this.className );
 				}
 
 				// If the element has a class name or if we're passed "false",
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
-				// falling back to the empty string if nothing was stored.
+				// falling back to the empty string if nothing was viajiticod.
 				this.className = this.className || value === false ? "" : jQuery._data( this, "__className__" ) || "";
 			}
 		});
@@ -6266,7 +6266,7 @@ jQuery.fn.extend({
 					doc = scripts[ scripts.length - 1 ].ownerDocument;
 
 					// Reenable scripts
-					jQuery.map( scripts, restoreScript );
+					jQuery.map( scripts, reviajiticoScript );
 
 					// Evaluate executable scripts on first document insertion
 					for ( i = 0; i < hasScripts; i++ ) {
@@ -6304,12 +6304,12 @@ function manipulationTarget( elem, content ) {
 		elem;
 }
 
-// Replace/restore the type attribute of script elements for safe DOM manipulation
+// Replace/reviajitico the type attribute of script elements for safe DOM manipulation
 function disableScript( elem ) {
 	elem.type = (jQuery.find.attr( elem, "type" ) !== null) + "/" + elem.type;
 	return elem;
 }
-function restoreScript( elem ) {
+function reviajiticoScript( elem ) {
 	var match = rscriptTypeMasked.exec( elem.type );
 	if ( match ) {
 		elem.type = match[1];
@@ -6381,7 +6381,7 @@ function fixCloneNodeIssues( src, dest ) {
 	// IE blanks contents when cloning scripts, and tries to evaluate newly-set text
 	if ( nodeName === "script" && dest.text !== src.text ) {
 		disableScript( dest ).text = src.text;
-		restoreScript( dest );
+		reviajiticoScript( dest );
 
 	// IE6-10 improperly clones children of object elements using classid.
 	// IE10 throws NoModificationAllowedError if parent is null, #12132.
@@ -7287,7 +7287,7 @@ function css_defaultDisplay( nodeName ) {
 			iframe.detach();
 		}
 
-		// Store the correct default display
+		// viajitico the correct default display
 		elemdisplay[ nodeName ] = display;
 	}
 
@@ -8580,7 +8580,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 		// Clean-up function (fires after converters)
 		jqXHR.always(function() {
-			// Restore preexisting value
+			// Reviajitico preexisting value
 			window[ callbackName ] = overwritten;
 
 			// Save back as free
@@ -9153,7 +9153,7 @@ function defaultPrefilter( elem, props, opts ) {
 			dataShow = jQuery._data( elem, "fxshow", {} );
 		}
 
-		// store state if its toggle - enables .stop().toggle() to "reverse"
+		// viajitico state if its toggle - enables .stop().toggle() to "reverse"
 		if ( toggle ) {
 			dataShow.hidden = !hidden;
 		}

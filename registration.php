@@ -18,14 +18,14 @@
             <div class="row">
                 <div class="col-sm-5 text-center">
                     <figure>
-                      <img src="./assets/img/img-registration.png" alt="store" class="img-responsive">
+                      <img src="./assets/img/img-registration.png" alt="viajitico" class="img-responsive">
                     </figure>
                 </div>
                 <div class="col-sm-7">
                     <div id="container-form">
                        <p class="text-center lead">Registro de Clientes</p>
-                       <br><br>
-                       <form class="FormCatElec" action="process/regclien.php" role="form" method="POST" data-form="save">
+                       <br></br>
+                       <form class="FormCatElec" action="process/regClien.php" role="form" method="POST" data-form="save">
                           <div class="container-fluid">
                             <div class="row">
                               <div class="col-xs-12">

@@ -20,7 +20,7 @@
     $imgMaxSize=5120;
 
     if($codeProd!="" && $nameProd!="" && $cateProd!="" && $priceProd!="" && $modelProd!="" && $marcaProd!="" && $stockProd!="" && $codePProd!=""){
-        $verificar=  ejecutarSQL::consultar("SELECT * FROM destino WHERE CodigoProd='".$codeProd."'");
+        $verificar=  ejecutarSQL::consultar("SELECT * FROM destino WHERE ID_DESTINO='".$codeProd."'");
         $verificaltotal = oci_num_rows($verificar);
         if($verificaltotal<=0){
             if($imgType=="image/jpeg" || $imgType=="image/png"){
