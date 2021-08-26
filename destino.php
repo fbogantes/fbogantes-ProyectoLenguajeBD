@@ -38,7 +38,7 @@ include './library/consulSQL.php';
                                 $regpagina = 30;
                                 $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                                $destinos=ejecutarSQL::consultar("SELECT * FROM DESTINO");
+                                $destinos=ejecutarSQL::consultar("SELECT * FROM DESTINO_VIEW");
                                 oci_execute($destinos);
                                 $totalregistros = ejecutarSQL::consultar("SELECT count(*) FROM DESTINO");
                                 oci_execute($destinos);
@@ -52,11 +52,10 @@ include './library/consulSQL.php';
                             ?>
                             <tr>
                             <td class="text-center"><?php echo $cr; ?></td>
-                            <td class="text-center"><?php echo $row['ID_DESTINO']; ?></td>
                             <td class="text-center"><?php echo $row['DES_ACTIVIDAD']; ?></td>
-                            <td class="text-center"><?php echo $row['ID_PAIS']; ?></td>
-                            <td class="text-center"><?php echo $row['ID_PROVINCIA']; ?></td>
-                            <td class="text-center"><?php echo $row['ID_CANTON']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PAIS']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PROVINCIA']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_CANTON']; ?></td>
                             <td class="text-center">
                                 <a href="#!" class="btn btn-raised btn-xs btn-success btn-block btn-up-row" data-code="<?php echo $row["ID_DESTINO"]; ?>">Actualizar</a>
                                 <?php 
