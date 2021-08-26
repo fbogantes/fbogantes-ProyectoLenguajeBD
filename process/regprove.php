@@ -9,13 +9,13 @@ $dirProve=consultasSQL::clean_string($_POST['prove-dir']);
 $telProve=consultasSQL::clean_string($_POST['prove-tel']);
 $webProve=consultasSQL::clean_string($_POST['prove-web']);
 
-$verificar=  ejecutarSQL::consultar("SELECT * FROM proveedor WHERE NITProveedor='".$nitProve."'");
-if(mysqli_num_rows($verificar)<=0){
-    if(consultasSQL::InsertSQL("proveedor", "NITProveedor, NombreProveedor, Direccion, Telefono, PaginaWeb", "'$nitProve','$nameProve','$dirProve','$telProve','$webProve'")){
+$verificar=  ejecutarSQL::consultar("SELECT * FROM  WHERE NIT='".$nitProve."'");
+if(oci_num_rows($verificar)<=0){
+    if(consultasSQL::InsertSQL("", "NIT, Nombre, Direccion, Telefono, PaginaWeb", "'$nitProve','$nameProve','$dirProve','$telProve','$webProve'")){
         echo '<script>
             swal({
-              title: "Proveedor registrado",
-              text: "Los datos del proveedor se agregaron con éxito",
+              title: " registrado",
+              text: "Los datos del  se agregaron con éxito",
               type: "success",
               showCancelButton: true,
               confirmButtonClass: "btn-danger",
@@ -38,4 +38,4 @@ if(mysqli_num_rows($verificar)<=0){
 }else{
     echo '<script>swal("ERROR", "El número de NIT/CEDULA que ha ingresado ya se encuentra registrado en el sistema, por favor ingrese otro número de NIT o CEDULA", "error");</script>';
 }
-mysqli_free_result($verificar);
+oci_free_result($verificar);

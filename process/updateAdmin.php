@@ -12,7 +12,7 @@ $password2=consultasSQL::clean_string($_POST['admin-pass2']);
 $finalname=$nameold;
 if($nameold!=$name){
 	$verificar=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='".$name."'");
-	if(mysqli_num_rows($verificar)<=0){
+	if(oci_num_rows($verificar)<=0){
 		$finalname=$name;
 	}else{
 	    echo '<script>swal("ERROR", "El nombre de usuario que acaba de ingresar ya se encuentra registrado, por favor elija otro", "error");</script>';

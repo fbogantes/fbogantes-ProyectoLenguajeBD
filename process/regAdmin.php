@@ -15,7 +15,7 @@ if($passAdmin1!=$passAdmin2){
 $passAdminFinal=md5($passAdmin1);
 
 $verificar=ejecutarSQL::consultar("SELECT * FROM administrador WHERE Nombre='".$nameAdmin."'");
-if(mysqli_num_rows($verificar)<=0){
+if(oci_num_rows($verificar)<=0){
     if(consultasSQL::InsertSQL("administrador", "Nombre, Clave", "'$nameAdmin','$passAdminFinal'")){
         echo '<script>
             swal({

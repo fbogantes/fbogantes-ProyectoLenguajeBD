@@ -19,7 +19,7 @@
 
 	if($oldUser!=$user){
 		$SelectUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre='".$user."'");
-		if(mysqli_num_rows($SelectUser)==1){
+		if(oci_num_rows($SelectUser)==1){
 			echo '<script>swal("Ocurrio un error inesperado", "El nombre de usuario que ha ingresado ya se encuentra registrado en el sistema, por favor escriba otro e intente nuevamente", "error");</script>';
 			exit();
 		}
@@ -33,7 +33,7 @@
 		}else{
 			$oldPass=md5($oldPass);
 			$CheckLog=ejecutarSQL::consultar("SELECT * FROM cliente WHERE Nombre='".$oldUser."' AND Clave='$oldPass'");
-			if(mysqli_num_rows($CheckLog)==1){
+			if(oci_num_rows($CheckLog)==1){
 				$newPass=md5($newPass);
 				$campos="Nombre='$user',NombreCompleto='$Nombre',Apellido='$Apellido',Clave='$newPass',Direccion='$Direccion',Telefono='$Telefono',Email='$Email'";
 			}else{

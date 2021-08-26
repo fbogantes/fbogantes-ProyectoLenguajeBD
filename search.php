@@ -5,7 +5,7 @@ include './library/consulSQL.php';
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Productos</title>
+    <title>destinos</title>
     <?php include './plantilla/link.php'; ?>
 </head>
 <body id="container-page-product">
@@ -14,7 +14,7 @@ include './library/consulSQL.php';
        <br>
         <div class="container">
             <div class="page-header">
-              <h1>BÚSQUEDA DE PRODUCTOS <small class="tittles-pages-logo">STORE</small></h1>
+              <h1>Busqueda de destinos <small class="tittles-pages-logo">ViajiTico</small></h1>
             </div>
             <div class="container-fluid">
               <div class="row">
@@ -23,7 +23,7 @@ include './library/consulSQL.php';
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input type="text" id="addon1" class="form-control" name="term" required="" title="Escriba nombre o marca del producto">
+                        <input type="text" id="addon1" class="form-control" name="term" required="" title="Escriba nombre o Provincia del destino">
                         <span class="input-group-btn">
                             <button class="btn btn-info btn-raised" type="submit">Buscar</button>
                         </span>
@@ -39,103 +39,77 @@ include './library/consulSQL.php';
             ?>
               <div class="container-fluid">
                 <div class="row">
-                  <?php
-                    $mysqli = oci_connect(SERVER, USER, PASS);
-                    //mysqli_set_charset($mysqli, "utf8");
+                <div class="panel panel-info">
+                <div class="panel-heading text-center"><h4>Destinos de la Página</h4></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="">
+                            <tr>
+                              <th class="text-center">ID</th>
+                                <th class="text-center">Destino</th>
+                                <th class="text-center">Canton</th> 
+                                <th class="text-center">Provincia</th>
+                                <th class="text-center">Pais</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                <?php
+                            include './library/configServer.php';
+                            include './library/consulSQL.php';
 
-                    $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
-                    $regpagina = 20;
-                    $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
+                                $oci = ejecutarSQL::conectar();
 
-                    $consultar_productos=oci_parse($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE NombreProd LIKE '%".$search."%' OR Modelo LIKE '%".$search."%' OR Marca LIKE '%".$search."%' LIMIT $inicio, $regpagina");
+                                $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
+                                $regpagina = 30;
+                                $inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-                    $totalregistros = oci_parse($mysqli,"SELECT FOUND_ROWS()");
-                    $totalregistros = oci_fetch_array($totalregistros, MYSQLI_ASSOC);
-          
-                    $numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
+                                $destinos=ejecutarSQL::consultar("SELECT * FROM DESTINO_VIEW where DES_ACTIVIDAD LIKE '%':term'%' OR Canton LIKE '%':term'%' OR Provincia LIKE '%':term'%'");
+                                oci_bind_by_name($destinos, ':term', $search);
+                                oci_execute($destinos);
 
-                    if(oci_num_rows($consultar_productos)>=1){
-                      echo '<div class="col-xs-12"><h3 class="text-center">Se muestran los productos con el nombre, marca o modelo <strong>"'.$search.'"</strong></h3></div><br>';
-                      while($prod=oci_fetch_array($consultar_productos, MYSQLI_ASSOC)){
-                  ?>
-                      <div class="col-xs-12 col-sm-6 col-md-4">
-                           <div class="thumbnail">
-                             <img src="./assets/img-products/<?php if($prod['Imagen']!="" && is_file("./assets/img-products/".$prod['Imagen'])){ echo $prod['Imagen']; }else{ echo "default.png"; } ?>
-                             ">
-                             <div class="caption">
-                               <h3><?php echo $prod['Marca']; ?></h3>
-                               <p><?php echo $prod['NombreProd']; ?></p>
-                               <p>$<?php echo $prod['Precio']; ?></p>
-                               <p class="text-center">
-                                   <a href="infoProd.php?CodigoProd=<?php echo $prod['CodigoProd']; ?>" class="btn btn-primary btn-raised btn-sm btn-block"><i class="fa fa-plus"></i>&nbsp; Detalles</a>
-                               </p>
-
-                             </div>
-                           </div>
-                       </div>     
-                  <?php    
-                    }
-                    if($numeropaginas>0):
-                  ?>
-                  <div class="clearfix"></div>
-                  <div class="text-center">
-                    <ul class="pagination">
-                      <?php if($pagina == 1): ?>
-                          <li class="disabled">
-                              <a>
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>
-                      <?php else: ?>
-                          <li>
-                              <a href="search.php?term=<?php echo $search; ?>&pag=<?php echo $pagina-1; ?>">
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>
-                      <?php endif; ?>
-
-
-                      <?php
-                          for($i=1; $i <= $numeropaginas; $i++ ){
-                              if($pagina == $i){
-                                  echo '<li class="active"><a href="search.php?term='.$search.'&pag='.$i.'">'.$i.'</a></li>';
-                              }else{
-                                  echo '<li><a href="search.php?term='.$search.'&pag='.$i.'">'.$i.'</a></li>';
+                                $cr=$inicio+1;
+                                
+                                while($row=oci_fetch_array($destinos, OCI_ASSOC)){
+                            ?>
+                            <tr>
+                            <td class="text-center"><?php echo $cr; ?></td>
+                            <td class="text-center"><?php echo $row['DES_ACTIVIDAD']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_CANTON']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PROVINCIA']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PAIS']; ?></td>
+                            <?php
+                              $cr++;
                               }
-                          }
-                      ?>
-                      
+                            ?>
+                        </tbody>
+                    </table>
+                    </div>
 
-                      <?php if($pagina == $numeropaginas): ?>
-                          <li class="disabled">
-                              <a>
-                                  <span aria-hidden="true">&raquo;</span>
-                              </a>
-                          </li>
-                      <?php else: ?>
-                          <li>
-                              <a href="search.php?term=<?php echo $search; ?>&pag=<?php echo $pagina+1; ?>">
-                                  <span aria-hidden="true">&raquo;</span>
-                              </a>
-                          </li>
-                      <?php endif; ?>
-                    </ul>
-                  </div>
-                  <?php
-                    endif;
-                    }else{
-                      echo '<h2 class="text-center">Lo sentimos, no hemos encontrado productos con el nombre, marca o modelo <strong>"'.$search.'"</strong></h2>';
-                    }
-                  ?>
-                </div>
-              </div>
-            <?php
-              }else{
-                  echo '<h2 class="text-center">Por favor escriba el nombre o marca del producto que desea buscar</h2>';
-              }
-            ?>
+                <?php 
+              } ?>
+            </div>
         </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-row" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content" style="padding: 15px;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h5 class="modal-title text-center text-primary" id="myModalLabel">Actualizar estado del pedido</h5>
+        </div>
+        <form action="./process/updatePedido.php" method="POST" class="FormCatElec" data-form="update">
+            <div id="OrderSelect"></div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success btn-raised btn-sm">Actualizar</button>
+              <button type="button" class="btn btn-danger btn-raised btn-sm" data-dismiss="modal">Cancelar</button>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>
     </section>
-    <?php include './plantilla/footer.php'; ?>
+    <?php  include './plantilla/footer.php'; ?>
 </body>
 </html>

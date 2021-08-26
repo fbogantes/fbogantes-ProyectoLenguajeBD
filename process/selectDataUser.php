@@ -6,8 +6,8 @@
 	$code=consultasSQL::clean_string($_POST['code']);
 
 	$SelectUser=ejecutarSQL::consultar("SELECT * FROM cliente WHERE NIT='".$code."'");
-	if(mysqli_num_rows($SelectUser)==1){
-		$DataUser=mysqli_fetch_array($SelectUser, MYSQLI_ASSOC);
+	if(oci_num_rows($SelectUser)==1){
+		$DataUser=oci_fetch_array($SelectUser, oci_ASSOC);
 		echo '
             <div class="container-fluid">
                 <div class="row">

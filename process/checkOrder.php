@@ -4,7 +4,7 @@ include '../library/configServer.php';
 include '../library/consulSQL.php';
 $code=consultasSQL::clean_string($_POST['code']);
 $selOrder=ejecutarSQL::consultar("SELECT Estado FROM venta WHERE NumPedido='".$code."'");
-$peU=mysqli_fetch_array($selOrder, MYSQLI_ASSOC);
+$peU=oci_fetch_array($selOrder, oci_ASSOC);
 echo '<input type="hidden" value="'.$code.'" name="num-pedido">';
 echo '
 	<div class="form-group">

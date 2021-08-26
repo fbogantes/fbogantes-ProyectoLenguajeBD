@@ -4,11 +4,11 @@
 <ul class="breadcrumb" style="margin-bottom: 5px;">
     <li>
         <a href="configAdmin.php?view=provider">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo Proveedor
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Nuevo 
         </a>
     </li>
     <li>
-        <a href="configAdmin.php?view=providerlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; Proveedores de la tienda</a>
+        <a href="configAdmin.php?view=providerlist"><i class="fa fa-list-ol" aria-hidden="true"></i> &nbsp; es de la tienda</a>
     </li>
 </ul>
 <div class="container">
@@ -16,7 +16,7 @@
 		<div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
-                <div class="panel-heading text-center"><h4>Proveedores de la tienda</h4></div>
+                <div class="panel-heading text-center"><h4>es de la tienda</h4></div>
               	<div class="table-responsive">
                   <table class="table table-striped table-hover">
                       	<thead>
@@ -33,36 +33,36 @@
                       	</thead>
                       	<tbody>
                           	<?php
-								$mysqli = mysqli_connect(SERVER, USER, PASS, BD);
-								mysqli_set_charset($mysqli, "utf8");
+								$oci = oci_connect(SERVER, USER, PASS, BD);
+								oci_set_charset($oci, "utf8");
 
 								$pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
 								$regpagina = 30;
 								$inicio = ($pagina > 1) ? (($pagina * $regpagina) - $regpagina) : 0;
 
-								$proveedores=mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM proveedor LIMIT $inicio, $regpagina");
+								$es=oci_query($oci,"SELECT SQL_CALC_FOUND_ROWS * FROM  LIMIT $inicio, $regpagina");
 
-								$totalregistros = mysqli_query($mysqli,"SELECT FOUND_ROWS()");
-								$totalregistros = mysqli_fetch_array($totalregistros, MYSQLI_ASSOC);
+								$totalregistros = oci_query($oci,"SELECT FOUND_ROWS()");
+								$totalregistros = oci_fetch_array($totalregistros, oci_ASSOC);
 
 								$numeropaginas = ceil($totalregistros["FOUND_ROWS()"]/$regpagina);
 
 								$cr=$inicio+1;
-                                while($prov=mysqli_fetch_array($proveedores, MYSQLI_ASSOC)){
+                                while($prov=oci_fetch_array($es, oci_ASSOC)){
                             ?>
 							<tr>
 								<td class="text-center"><?php echo $cr; ?></td>
-								<td class="text-center"><?php echo $prov['NITProveedor']; ?></td>
-								<td class="text-center"><?php echo $prov['NombreProveedor']; ?></td>
+								<td class="text-center"><?php echo $prov['NIT']; ?></td>
+								<td class="text-center"><?php echo $prov['Nombre']; ?></td>
 								<td class="text-center"><?php echo $prov['Direccion']; ?></td>
 								<td class="text-center"><?php echo $prov['Telefono']; ?></td>
 								<td class="text-center"><?php echo $prov['PaginaWeb']; ?></td>
 								<td class="text-center">
-	                        		<a href="configAdmin.php?view=providerinfo&code=<?php echo $prov['NITProveedor']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
+	                        		<a href="configAdmin.php?view=providerinfo&code=<?php echo $prov['NIT']; ?>" class="btn btn-raised btn-xs btn-success">Actualizar</a>
 	                        	</td>
 	                        	<td class="text-center">
 	                        		<form action="process/delprove.php" method="POST" class="FormCatElec" data-form="delete">
-	                        			<input type="hidden" name="nit-prove" value="<?php echo $prov['NITProveedor']; ?>">
+	                        			<input type="hidden" name="nit-prove" value="<?php echo $prov['NIT']; ?>">
 	                        			<button type="submit" class="btn btn-raised btn-xs btn-danger">Eliminar</button>	
 	                        		</form>
 	                        	</td>

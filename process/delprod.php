@@ -5,10 +5,10 @@
      $codeProd=consultasSQL::clean_string($_POST['prod-code']);
 
     $checP=ejecutarSQL::consultar("SELECT * FROM detalle WHERE CodigoProd='$codeProd'");
-    $cons=ejecutarSQL::consultar("SELECT * FROM producto WHERE CodigoProd='$codeProd'");
-    $tmp=mysqli_fetch_array($cons, MYSQLI_ASSOC);
-    if(mysqli_num_rows($checP)<=0){
-        if(consultasSQL::DeleteSQL('producto', "CodigoProd='".$codeProd."'")){
+    $cons=ejecutarSQL::consultar("SELECT * FROM destino WHERE CodigoProd='$codeProd'");
+    $tmp=oci_fetch_array($cons, oci_ASSOC);
+    if(oci_num_rows($checP)<=0){
+        if(consultasSQL::DeleteSQL('destino', "CodigoProd='".$codeProd."'")){
             $imagen=$tmp['Imagen'];
             $carpeta='../assets/img-products/';
             $directorio=$carpeta.$imagen;
@@ -18,8 +18,8 @@
             }
             echo '<script>
                 swal({
-                  title: "Producto eliminado",
-                  text: "El producto se eliminó con éxito de la tienda",
+                  title: "destino eliminado",
+                  text: "El destino se eliminó con éxito de la tienda",
                   type: "success",
                   showCancelButton: true,
                   confirmButtonClass: "btn-danger",
@@ -40,7 +40,7 @@
             echo '<script>swal("ERROR", "Ocurrió un error inesperado, por favor intente nuevamente", "error");</script>'; 
         }
     }else{
-        echo '<script>swal("ERROR", "No podemos eliminar el producto porque se encuentra registrado en una venta", "error");</script>';
+        echo '<script>swal("ERROR", "No podemos eliminar el destino porque se encuentra registrado en una venta", "error");</script>';
     }
-    mysqli_free_result($checP);
-    mysqli_free_result($cons);
+    oci_free_result($checP);
+    oci_free_result($cons);

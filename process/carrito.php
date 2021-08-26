@@ -7,12 +7,12 @@ $codigo=consultasSQL::clean_string($_POST['codigo']);
 $cantidad=consultasSQL::clean_string($_POST['cantidad']);
 if(empty($_SESSION['carro'][$codigo]))
 {
-	$_SESSION['carro'][$codigo] = array('producto' => $codigo, 
+	$_SESSION['carro'][$codigo] = array('destino' => $codigo, 
                                         'cantidad' => $cantidad
                                         );
 	echo '<script>
         swal({
-        title: "Producto agregado",
+        title: "destino agregado",
         text: "Quieres ver el carrito de compras?",
         type: "info",
         showCancelButton: true,
@@ -30,7 +30,7 @@ if(empty($_SESSION['carro'][$codigo]))
 	echo '<script>
         swal({
         title: "ERROR",
-        text: "El producto ya fue agregado al carrito. Quieres ver el carrito de compras?",
+        text: "El destino ya fue agregado al carrito. Quieres ver el carrito de compras?",
         type: "error",
         showCancelButton: true,
         confirmButtonClass: "btn-success",

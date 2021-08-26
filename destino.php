@@ -12,7 +12,7 @@
         <div class="col-xs-12">
             <br><br>
             <div class="panel panel-info">
-                <div class="panel-heading text-center"><h4>Usuarios de la Página</h4></div>
+                <div class="panel-heading text-center"><h4>Destinos de la Página</h4></div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="">
@@ -29,7 +29,7 @@
                             include './library/configServer.php';
                             include './library/consulSQL.php';
 
-                                $mysqli = ejecutarSQL::conectar();
+                                $oci = ejecutarSQL::conectar();
 
                                 $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
                                 $regpagina = 30;
@@ -55,12 +55,6 @@
                             <td class="text-center"><?php echo $row['DES_PAIS']; ?></td>
                             <td class="text-center">
                                 <a href="#!" class="btn btn-raised btn-xs btn-success btn-block btn-up-row" data-code="<?php echo $row["ID_DESTINO"]; ?>">Actualizar</a>
-                                <?php 
-                                
-                                    if(is_file("./assets/comprobantes/".$row['Adjunto'])){
-                                      echo '<a href="./assets/comprobantes/'.$row['Adjunto'].'" target="_blank" class="btn btn-raised btn-xs btn-info btn-block">Comprobante</a>';
-                                    }
-                                ?>
                             </td>
                             <td class="text-center">
                               <form action="process/delPedido.php" method="POST" class="FormCatElec" data-form="delete">
