@@ -1,7 +1,3 @@
-<?php
-include './library/configServer.php';
-include './library/consulSQL.php';
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,9 +6,7 @@ include './library/consulSQL.php';
 </head>
 <body id="container-page-product">
     <?php include './plantilla/navbar.php'; ?>
-    <p class="lead">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, culpa quasi tempore assumenda, perferendis sunt. Quo consequatur saepe commodi maxime, sit atque veniam blanditiis molestias obcaecati rerum, consectetur odit accusamus.
-</p>
+    <section id="form-registration">
 <div class="container">
   <div class="row">
         <div class="col-xs-12">
@@ -32,6 +26,9 @@ include './library/consulSQL.php';
                         </thead>
                         <tbody>
                             <?php
+                            include './library/configServer.php';
+                            include './library/consulSQL.php';
+
                                 $mysqli = ejecutarSQL::conectar();
 
                                 $pagina = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
@@ -146,7 +143,7 @@ include './library/consulSQL.php';
       </div>
   </div>
 </div>
-
+</section>
 <script>
     $(document).ready(function(){
         $('.btn-up-row').on('click', function(e){
