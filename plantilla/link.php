@@ -8,8 +8,7 @@
 <link rel="stylesheet" href="./css/media.css">
 <link rel="stylesheet" href="./css/style.css">
 
-<!--<script src="js/validaciones.js" defer></script> 
-<script src="js/validacion.js" defer></script> 
+<!-- 
 <script src="./js/jquery.min.js" defer></script>-->
 
 <script src="./js/bootstrap.min.js" defer></script>
