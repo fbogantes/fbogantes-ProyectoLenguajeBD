@@ -25,9 +25,9 @@ include './library/consulSQL.php';
                             <tr>
                               <th class="text-center">ID</th>
                                 <th class="text-center">Destino</th>
-                                <th class="text-center">Pais</th>
-                                <th class="text-center">Provincia</th>
                                 <th class="text-center">Canton</th> 
+                                <th class="text-center">Provincia</th>
+                                <th class="text-center">Pais</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,9 +53,9 @@ include './library/consulSQL.php';
                             <tr>
                             <td class="text-center"><?php echo $cr; ?></td>
                             <td class="text-center"><?php echo $row['DES_ACTIVIDAD']; ?></td>
-                            <td class="text-center"><?php echo $row['DES_PAIS']; ?></td>
-                            <td class="text-center"><?php echo $row['DES_PROVINCIA']; ?></td>
                             <td class="text-center"><?php echo $row['DES_CANTON']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PROVINCIA']; ?></td>
+                            <td class="text-center"><?php echo $row['DES_PAIS']; ?></td>
                             <td class="text-center">
                                 <a href="#!" class="btn btn-raised btn-xs btn-success btn-block btn-up-row" data-code="<?php echo $row["ID_DESTINO"]; ?>">Actualizar</a>
                                 <?php 
